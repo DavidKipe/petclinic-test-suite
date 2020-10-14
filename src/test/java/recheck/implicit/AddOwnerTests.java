@@ -59,43 +59,43 @@ class AddOwnerTests extends BaseTests {
 	@Test
 	void TestAddOwnerWithEmptyFirstName() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick("", lastName, address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit("", lastName, address, city, telephone);
 	}
 
 	@Test
 	void TestAddOwnerWithEmptyLastName() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, "", address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, "", address, city, telephone);
 	}
 
 	@Test
 	void TestAddOwnerWithEmptyAddress() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, "", city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, "", city, telephone);
 	}
 
 	@Test
 	void TestAddOwnerWithEmptyCity() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, "", telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, "", telephone);
 	}
 
 	@Test
 	void TestAddOwnerWithEmptyTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "");
 	}
 
 	@Test
 	void TestAddOwnerWithLongTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "010123456789");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "010123456789");
 	}
 
 	@Test
 	void TestAddOwnerWithNotNumericTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "abcdef");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "abcdef");
 	}
 
 	@AfterEach

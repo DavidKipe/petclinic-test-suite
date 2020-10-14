@@ -8,11 +8,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import pageobject.AddEditPetPO;
+import pageobject.AddVisitPO;
 import pageobject.NavBarPO;
 import recheck.BaseTests;
 
-class AddPetTests extends BaseTests {
+public class AddVisitTests extends BaseTests {
 
 	private static NavBarPO navBarPO;
 
@@ -36,31 +36,29 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void testAddPetToOwner() {
-		re.startTest("addPetToOwner");
+	void testAddVisitToPet() {
+		re.startTest("addVisitToPet");
+		String date = "2020-10-30";
+		String description = "Routine";
 
-		String name = "Arnold";
-		String birthDate = "2017-11-30";
+		AddVisitPO addVisitPO = navBarPO.goToFindOwner().searchFor(lastName).addVisitToFirstPet();
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
-		addEditPetPO.fillFieldsAndSubmit(name, birthDate);
+		addVisitPO.fillFieldsAndSubmit(date, description);
 
-		// NOTE fail if it is not a clean run because the name is already in use (these tests don't clean up)
-		// NOTE fail on OLD version because the submit button is underneath the date picker
-
-		re.check(driver, "addPetToOwner");
+		re.check(driver, "addVisitToPet");
 		re.capTest();
 	}
 
 	@Test
-	void testAddPetToOwnerWithEmptyFields() {
-		re.startTest("addPetToOwnerWithEmptyFields");
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+	void testAddVisitToPetWithEmptyDescription() {
+		re.startTest("addVisitToPetWithEmptyDescription");
+		AddVisitPO addVisitPO = navBarPO.goToFindOwner().searchFor(lastName).addVisitToFirstPet();
 
-		addEditPetPO.submit();
+		addVisitPO.submit();
 
-		re.check(driver, "addPetToOwnerWithEmptyFields");
+		re.check(driver, "addVisitToPetWithEmptyDescription");
 		re.capTest();
+
 	}
 
 	@AfterEach

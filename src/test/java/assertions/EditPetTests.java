@@ -47,7 +47,7 @@ public class EditPetTests extends BaseTests {
 
 		addEditPetPO.setName("");
 		addEditPetPO.setBirthDate("");
-		addEditPetPO.clickSubmitOnly();
+		addEditPetPO.submit();
 
 		assertEquals("is required", addEditPetPO.getNameError());
 		assertEquals("is required", addEditPetPO.getBirthDateError());

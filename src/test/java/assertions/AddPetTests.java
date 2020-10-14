@@ -29,7 +29,7 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void TestAddPetToOwner() {
+	void testAddPetToOwner() {
 		String name = "Arnold";
 		String birthDate = "2017-11-30";
 
@@ -45,10 +45,10 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void TestAddPetToOwnerWithEmptyFields() {
+	void testAddPetToOwnerWithEmptyFields() {
 		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
 
-		addEditPetPO.clickSubmitOnly();
+		addEditPetPO.submit();
 
 		assertEquals("is required", addEditPetPO.getNameError());
 		assertEquals("is required", addEditPetPO.getBirthDateError());

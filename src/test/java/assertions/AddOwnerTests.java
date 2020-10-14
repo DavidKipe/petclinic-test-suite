@@ -5,13 +5,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageobject.AddEditOwnerPO;
 import pageobject.NavBarPO;
 import pageobject.OwnerPO;
 import recheck.BaseTests;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,11 +17,11 @@ class AddOwnerTests extends BaseTests {
 
 	private static NavBarPO navBarPO;
 
-	private String firstName = "Mario";
-    private String lastName = "Rossi";
-    private String address = "Via Dei Matti";
-    private String city = "Genova";
-    private String telephone = "010123456";
+	private final String firstName = "Mario";
+    private final String lastName = "Rossi";
+    private final String address = "Via Dei Matti";
+    private final String city = "Genova";
+    private final String telephone = "010123456";
 
 	@BeforeAll
     static void createAndStartService() {
@@ -33,7 +30,7 @@ class AddOwnerTests extends BaseTests {
     }
 
     @Test
-    void TestAddOwnerWithValidData() {
+    void testAddOwnerWithValidData() {
         AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
         OwnerPO ownerPO = addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
@@ -45,64 +42,64 @@ class AddOwnerTests extends BaseTests {
     }
 
     @Test
-    void TestAddOwnerWithEmptyFirstName() {
+    void testAddOwnerWithEmptyFirstName() {
         AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick("", lastName, address, city, telephone);
+	    addEditOwnerPO.fillFieldsAndSubmit("", lastName, address, city, telephone);
 
         assertTrue(addEditOwnerPO.getFirstNameError().contains("must not be empty"));
     }
 
     @Test
-    void TestAddOwnerWithEmptyLastName() {
+    void testAddOwnerWithEmptyLastName() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-		addEditOwnerPO.fillFieldsAndClick(firstName, "", address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, "", address, city, telephone);
 
 	    assertTrue(addEditOwnerPO.getLastNameError().contains("must not be empty"));
     }
 
     @Test
-    void TestAddOwnerWithEmptyAddress() {
+    void testAddOwnerWithEmptyAddress() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick(firstName, lastName, "", city, telephone);
+	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, "", city, telephone);
 
 		assertTrue(addEditOwnerPO.getAddressError().contains("must not be empty"));
     }
 
     @Test
-    void TestAddOwnerWithEmptyCity() {
+    void testAddOwnerWithEmptyCity() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, "", telephone);
+	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, "", telephone);
 
 		assertTrue(addEditOwnerPO.getCityError().contains("must not be empty"));
     }
 
     @Test
-    void TestAddOwnerWithEmptyTelephone() {
+    void testAddOwnerWithEmptyTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "");
+	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "");
 
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
     }
 
     @Test
-    void TestAddOwnerWithLongTelephone() {
+    void testAddOwnerWithLongTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "010123456789");
+	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "010123456789");
 
         assertTrue(addEditOwnerPO.getTelephoneError().contains("numeric value out of bounds (<10 digits>.<0 digits> expected)"));
     }
 
     @Test
-    void TestAddOwnerWithNotNumericTelephone() {
+    void testAddOwnerWithNotNumericTelephone() {
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
 
-	    addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "abcdef");
+	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "abcdef");
 
         assertTrue(addEditOwnerPO.getTelephoneError().contains("numeric value out of bounds (<10 digits>.<0 digits> expected)"));
     }

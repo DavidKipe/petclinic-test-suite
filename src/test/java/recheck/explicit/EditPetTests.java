@@ -12,7 +12,7 @@ import pageobject.AddEditPetPO;
 import pageobject.NavBarPO;
 import recheck.BaseTests;
 
-class AddPetTests extends BaseTests {
+public class EditPetTests {
 
 	private static NavBarPO navBarPO;
 
@@ -36,30 +36,29 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void testAddPetToOwner() {
-		re.startTest("addPetToOwner");
+	void testEditWithValidData() {
+		re.startTest("editPet");
+		String name = "Arnold Jr.";
+		String birthDate = "2019-11-30";
 
-		String name = "Arnold";
-		String birthDate = "2017-11-30";
+		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
 		addEditPetPO.fillFieldsAndSubmit(name, birthDate);
 
-		// NOTE fail if it is not a clean run because the name is already in use (these tests don't clean up)
-		// NOTE fail on OLD version because the submit button is underneath the date picker
-
-		re.check(driver, "addPetToOwner");
+		re.check(driver, "editPet");
 		re.capTest();
 	}
 
 	@Test
-	void testAddPetToOwnerWithEmptyFields() {
-		re.startTest("addPetToOwnerWithEmptyFields");
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+	void testEditPetWithEmptyFields() {
+		re.startTest("editPetWithEmptyDescription");
+		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
 
+		addEditPetPO.setName("");
+		addEditPetPO.setBirthDate("");
 		addEditPetPO.submit();
 
-		re.check(driver, "addPetToOwnerWithEmptyFields");
+		re.check(driver, "editPetWithEmptyDescription");
 		re.capTest();
 	}
 

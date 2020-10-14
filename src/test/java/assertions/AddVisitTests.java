@@ -1,6 +1,5 @@
 package assertions;
 
-import dataclass.Pet;
 import dataclass.Visit;
 import driver.DriverManager;
 import org.junit.jupiter.api.AfterAll;
@@ -43,7 +42,7 @@ public class AddVisitTests extends BaseTests {
 	}
 
 	@Test
-	void testAddPetToOwnerWithEmptyDescription() {
+	void testAddVisitToPetWithEmptyDescription() {
 		AddVisitPO addVisitPO = navBarPO.goToFindOwner().searchFor(lastName).addVisitToFirstPet();
 
 		addVisitPO.submit();

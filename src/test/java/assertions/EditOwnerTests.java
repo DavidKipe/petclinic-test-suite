@@ -26,7 +26,7 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestEditOwnerWithValidData() {
+	void testEditOwnerWithValidData() {
 		String newFirstName = "Bob"; // new first name
 
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
@@ -38,34 +38,34 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestEditOwnerLongTelephone() {
+	void testEditOwnerLongTelephone() {
 		String newTelephone = "010123456789";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("numeric value out of bounds (<10 digits>.<0 digits> expected)"));
 	}
 
 	@Test
-	void TestEditOwnerNotNumericTelephone() {
+	void testEditOwnerNotNumericTelephone() {
 		String newTelephone = "abcdef";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		assertEquals("numeric value out of bounds (<10 digits>.<0 digits> expected)", addEditOwnerPO.getTelephoneError());
 	}
 
 	@Test
-	void TestEditOwnerWithEmptyField() {
+	void testEditOwnerWithEmptyField() {
 		String newTelephone = "";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
 		//assertEquals("must not be empty\nnumeric value out of bounds (<10 digits>.<0 digits> expected)", addEditOwnerPO.getTelephoneError());

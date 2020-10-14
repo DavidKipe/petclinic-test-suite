@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.FindOwnerPO;
 import pageobject.NavBarPO;
-import pageobject.OwnerPO;
 import pageobject.OwnersListPO;
 import recheck.BaseTests;
 
@@ -37,18 +36,18 @@ class FindOwnerTests extends BaseTests {
 
 
 	@Test
-	void TestFindExistingOwner() {
+	void testFindExistingOwner() {
 		re.startTest("findExistingOwner");
 
 		String lastName = "Black";
-		OwnerPO ownerPO = navBarPO.goToFindOwner().searchFor(lastName);
+		navBarPO.goToFindOwner().searchFor(lastName);
 
 		re.check(driver, "findExistingOwner");
 		re.capTest();
 	}
 
 	@Test
-	void TestFindNotExistingOwner() {
+	void testFindNotExistingOwner() {
 		re.startTest("findNotExistingOwner");
 
 		FindOwnerPO findOwnerPO = navBarPO.goToFindOwner();
@@ -59,22 +58,22 @@ class FindOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestFindAllOwners() {
+	void testFindAllOwners() {
 		re.startTest("findAllOwners");
 
-		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
+		navBarPO.goToFindOwner().searchAll();
 
 		re.check(driver, "findAllOwners");
 		re.capTest();
 	}
 
 	@Test
-	void TestFindExistingOwnerFromAll() {
+	void testFindExistingOwnerFromAll() {
 		re.startTest("findExistingOwnerFromAll");
 
 		String fullName = "George Franklin";
 		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
-		OwnerPO ownerPO = ownersListPO.clickOn(fullName);
+		ownersListPO.clickOn(fullName);
 
 		re.check(driver, "findExistingOwnerFromAll");
 		re.capTest();

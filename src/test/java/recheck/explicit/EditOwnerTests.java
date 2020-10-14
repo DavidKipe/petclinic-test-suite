@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.AddEditOwnerPO;
 import pageobject.NavBarPO;
-import pageobject.OwnerPO;
 import recheck.BaseTests;
 
 class EditOwnerTests extends BaseTests {
@@ -37,52 +36,52 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestEditOwnerWithValidData() {
+	void testEditOwnerWithValidData() {
 		re.startTest("editOwnerWithValidData");
 
 		String newFirstName = "Bob"; // new first name
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setFirstName(newFirstName);
-		OwnerPO ownerPO = addEditOwnerPO.submit();
+		addEditOwnerPO.submit();
 
 		re.check(driver, "editOwnerWithValidData");
 		re.capTest();
 	}
 
 	@Test
-	void TestEditOwnerLongTelephone() {
+	void testEditOwnerLongTelephone() {
 		re.startTest("editOwnerLongTelephone");
 
 		String newTelephone = "010123456789";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		re.check(driver, "editOwnerLongTelephone");
 		re.capTest();
 	}
 
 	@Test
-	void TestEditOwnerNotNumericTelephone() {
+	void testEditOwnerNotNumericTelephone() {
 		re.startTest("editOwnerNotNumericTelephone");
 
 		String newTelephone = "abcdef";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		re.check(driver, "editOwnerNotNumericTelephone");
 		re.capTest();
 	}
 
 	@Test
-	void TestEditOwnerWithEmptyField() {
+	void testEditOwnerWithEmptyField() {
 		re.startTest("editOwnerWithEmptyField");
 
 		String newTelephone = "";
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
-		addEditOwnerPO.clickSubmitOnly();
+		addEditOwnerPO.submit();
 
 		re.check(driver, "editOwnerWithEmptyField");
 		re.capTest();

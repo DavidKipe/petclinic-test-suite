@@ -25,7 +25,7 @@ class FindOwnerTests extends BaseTests {
 
 
 	@Test
-	void TestFindExistingOwner() {
+	void testFindExistingOwner() {
 		String lastName = "Black";
 		OwnerPO ownerPO = navBarPO.goToFindOwner().searchFor(lastName);
 
@@ -33,7 +33,7 @@ class FindOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestFindNotExistingOwner() {
+	void testFindNotExistingOwner() {
 		FindOwnerPO findOwnerPO = navBarPO.goToFindOwner();
 		findOwnerPO.searchFor("nobody");
 
@@ -41,14 +41,14 @@ class FindOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestFindAllOwners() {
+	void testFindAllOwners() {
 		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
 
 		assertFalse(ownersListPO.isThereOnlyOneOwner());
 	}
 
 	@Test
-	void TestFindExistingOwnerFromAll() {
+	void testFindExistingOwnerFromAll() {
 		String fullName = "George Franklin";
 		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
 		OwnerPO ownerPO = ownersListPO.clickOn(fullName);

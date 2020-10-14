@@ -35,18 +35,9 @@ public class AddEditPetPO extends PageObject {
 		setBirthDate(birthDate);
 	}
 
-	public void fillFieldsAndClick(String name, String birthDate) {
-		fillFields(name, birthDate);
-		clickSubmitOnly();
-	}
-
 	public OwnerPO fillFieldsAndSubmit(String name, String birthDate) {
 		fillFields(name, birthDate);
 		return submit();
-	}
-
-	public void clickSubmitOnly() {
-		submitButton.click();
 	}
 
 	public OwnerPO submit() {

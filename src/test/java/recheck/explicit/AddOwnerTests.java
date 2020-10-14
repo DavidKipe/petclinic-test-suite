@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.AddEditOwnerPO;
 import pageobject.NavBarPO;
-import pageobject.OwnerPO;
 import recheck.BaseTests;
 
 
@@ -42,73 +41,73 @@ class AddOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void TestAddOwnerWithValidData() {
+	void testAddOwnerWithValidData() {
 		re.startTest("addOwnerWithValidData");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		OwnerPO ownerPO = addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
 		re.check(driver, "addOwnerWithValidData");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithEmptyFirstName() {
+	void testAddOwnerWithEmptyFirstName() {
 		re.startTest("addOwnerWithEmptyFirstName");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick("", lastName, address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit("", lastName, address, city, telephone);
 		re.check(driver, "addOwnerWithEmptyFirstName");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithEmptyLastName() {
+	void testAddOwnerWithEmptyLastName() {
 		re.startTest("addOwnerWithEmptyLastName");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, "", address, city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, "", address, city, telephone);
 		re.check(driver, "addOwnerWithEmptyLastName");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithEmptyAddress() {
+	void testAddOwnerWithEmptyAddress() {
 		re.startTest("addOwnerWithEmptyAddress");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, "", city, telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, "", city, telephone);
 		re.check(driver, "addOwnerWithEmptyAddress");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithEmptyCity() {
+	void testAddOwnerWithEmptyCity() {
 		re.startTest("addOwnerWithEmptyCity");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, "", telephone);
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, "", telephone);
 		re.check(driver, "addOwnerWithEmptyCity");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithEmptyTelephone() {
+	void testAddOwnerWithEmptyTelephone() {
 		re.startTest("addOwnerWithEmptyTelephone");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "");
 		re.check(driver, "addOwnerWithEmptyTelephone");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithLongTelephone() {
+	void testAddOwnerWithLongTelephone() {
 		re.startTest("addOwnerWithLongTelephone");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "010123456789");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "010123456789");
 		re.check(driver, "addOwnerWithLongTelephone");
 		re.capTest();
 	}
 
 	@Test
-	void TestAddOwnerWithNotNumericTelephone() {
+	void testAddOwnerWithNotNumericTelephone() {
 		re.startTest("addOwnerWithNotNumericTelephone");
 		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
-		addEditOwnerPO.fillFieldsAndClick(firstName, lastName, address, city, "abcdef");
+		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "abcdef");
 		re.check(driver, "addOwnerWithNotNumericTelephone");
 		re.capTest();
 	}

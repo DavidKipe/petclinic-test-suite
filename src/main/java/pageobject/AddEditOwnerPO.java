@@ -64,18 +64,9 @@ public class AddEditOwnerPO extends PageObject implements WrapsElement {
 		setTelephone(telephone);
 	}
 
-	public void clickSubmitOnly() {
-		submitButton.click();
-	}
-
 	public OwnerPO submit() {
 		submitButton.click();
 		return new OwnerPO(driver);
-	}
-
-	public void fillFieldsAndClick(String firstName, String lastName, String address, String city, String telephone) {
-		fillFields(firstName, lastName, address, city, telephone);
-		clickSubmitOnly();
 	}
 
 	public OwnerPO fillFieldsAndSubmit(String firstName, String lastName, String address, String city, String telephone) {
