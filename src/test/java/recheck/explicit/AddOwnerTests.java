@@ -34,7 +34,7 @@ class AddOwnerTests extends BaseTests {
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
 				.addIgnore("addowner_help_errors.filter.js")
-				.addIgnore("addowner.filter")
+				//.addIgnore("addowner.filter")
 				.build();
 		re = new RecheckImpl(recheckOptions);
 

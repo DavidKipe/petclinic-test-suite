@@ -9,14 +9,13 @@ import org.openqa.selenium.WebDriver;
 import pageobject.AddEditPetPO;
 import pageobject.NavBarPO;
 import pageobject.OwnerPO;
-import recheck.BaseTests;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AddPetTests extends BaseTests {
+public class EditPetTests extends BaseTests {
 
 	private static NavBarPO navBarPO;
 
@@ -29,25 +28,25 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void TestAddPetToOwner() {
-		String name = "Arnold";
-		String birthDate = "2017-11-30";
+	void testEditWithValidData() {
+		String name = "Arnold Jr.";
+		String birthDate = "2019-11-30";
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
 
 		OwnerPO ownerPO = addEditPetPO.fillFieldsAndSubmit(name, birthDate);
 
 		List<Pet> pets = ownerPO.getPets();
 
 		assertTrue(pets.stream().anyMatch(p -> p.name.equals(name) && p.birthDate.equals(birthDate)));
-		// NOTE fail if it is not a clean run because the name is already in use (these tests don't clean up)
-		// NOTE fail on OLD version because the submit button is underneath the date picker
 	}
 
 	@Test
-	void TestAddPetToOwnerWithEmptyFields() {
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+	void testEditPetWithEmptyFields() {
+		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
 
+		addEditPetPO.setName("");
+		addEditPetPO.setBirthDate("");
 		addEditPetPO.clickSubmitOnly();
 
 		assertEquals("is required", addEditPetPO.getNameError());

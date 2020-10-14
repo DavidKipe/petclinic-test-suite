@@ -1,7 +1,10 @@
 package pageobject;
 
+import dataclass.Pet;
+import dataclass.Visit;
 import org.openqa.selenium.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,14 +36,44 @@ public class OwnerPO extends PageObject implements WrapsElement {
 		return new AddEditOwnerPO(driver);
 	}
 
-	public AddPetPO addPet() {
+	public AddEditPetPO addPet() {
 		driver.findElement(By.xpath("//a[@class='btn btn-default'][contains(text(),'Add')]")).click();
-		return new AddPetPO(driver);
+		return new AddEditPetPO(driver);
 	}
 
-	public List<String> getPetNames() {
-		List<WebElement> petNames = driver.findElements(By.xpath("//dt[contains(text(),'Name')]/following::dd[1]"));
-		return petNames.stream().map(WebElement::getText).collect(Collectors.toList());
+	public AddEditPetPO editFirstPet() {
+		driver.findElement(By.xpath("//tbody/tr/td[1]/a[1]")).click();
+		return new AddEditPetPO(driver);
+	}
+
+	public AddVisitPO addVisitToFirstPet() {
+		driver.findElement(By.xpath("//tbody/tr/td[2]/a[1]")).click();
+		return new AddVisitPO(driver);
+	}
+
+	public List<Pet> getPets() {
+		final String petValueXPath = "//dt[contains(text(),'%s')]/following::dd[1]";
+		List<String> petNames = driver.findElements(By.xpath(String.format(petValueXPath, "Name"))).stream().map(WebElement::getText).collect(Collectors.toList());
+		List<String> petBirthDates = driver.findElements(By.xpath(String.format(petValueXPath, "Birth Date"))).stream().map(WebElement::getText).collect(Collectors.toList());
+		List<String> petTypes = driver.findElements(By.xpath(String.format(petValueXPath, "Type"))).stream().map(WebElement::getText).collect(Collectors.toList());
+
+		List<Pet> pets = new ArrayList<>(petNames.size());
+		for (int i = 0; i < petNames.size(); i++)
+			pets.add(new Pet(petNames.get(i), petBirthDates.get(i), petTypes.get(i)));
+		return pets;
+	}
+
+	public List<Visit> getVisitFirstPet() {
+		final String dates = "//body[1]/div[1]/div[1]/table[2]/tbody[1]/tr[1]/td[2]/table[1]/tbody[1]/tr[position() < last()]/td[1]";
+		final String descriptions = "//body[1]/div[1]/div[1]/table[2]/tbody[1]/tr[1]/td[2]/table[1]/tbody[1]/tr[position() < last()]/td[2]";
+
+		List<String> visitDates = driver.findElements(By.xpath(dates)).stream().map(WebElement::getText).collect(Collectors.toList());
+		List<String> visitDescriptions = driver.findElements(By.xpath(descriptions)).stream().map(WebElement::getText).collect(Collectors.toList());
+
+		List<Visit> visits = new ArrayList<>(visitDates.size());
+		for (int i = 0; i < visitDates.size(); i++)
+			visits.add(new Visit(visitDates.get(i), visitDescriptions.get(i)));
+		return visits;
 	}
 
 	public boolean areThereMoreOwners() {

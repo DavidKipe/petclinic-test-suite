@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class AddPetPO extends PageObject {
+public class AddEditPetPO extends PageObject {
 
 	@FindBy(how = How.XPATH, xpath = "//input[@id='name']")
 	private WebElement nameInput;
@@ -16,7 +16,7 @@ public class AddPetPO extends PageObject {
 	@FindBy(how = How.XPATH, xpath = "//button[@type='submit']")
 	private WebElement submitButton;
 
-	AddPetPO(WebDriver driver) {
+	AddEditPetPO(WebDriver driver) {
 		super(driver);
 	}
 

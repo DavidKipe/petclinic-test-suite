@@ -22,28 +22,28 @@
 # https://docs.retest.de/recheck/usage/filter/
 
 # These are sensible defaults, delete if they don't apply:
-attribute=style
-matcher: type=input, attribute-regex=border-.*-color
+#attribute=style
+#matcher: type=input, attribute-regex=border-.*-color
 #pixel-diff=5px
 
 
 ## my custom ignore rules ##
 
-attribute=id
-attribute=name
-attribute=action
-attribute=href
+#attribute=id
+#attribute=name
+#attribute=action
+#attribute=href
 
 attribute-regex=.*outline.*
-attribute-regex=.*border.*
-attribute-regex=.*margin.*
-attribute-regex=.*color.*
-attribute-regex=.*shadow.*
+#attribute-regex=.*border.*
+#attribute-regex=.*margin.*
+#attribute-regex=.*color.*
+#attribute-regex=.*shadow.*
 
 # more pixel difference allowed
-pixel-diff=50px
+#pixel-diff=50px
 
 # ignore the navbar
-matcher: xpath=/html[1]/body[1]/nav[1]
+#matcher: xpath=/html[1]/body[1]/nav[1]
 
 ##  ##
