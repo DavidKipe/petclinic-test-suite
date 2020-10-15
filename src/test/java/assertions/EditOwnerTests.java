@@ -56,15 +56,17 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void testEditOwnerWithEmptyField() {
-		String newTelephone = "";
+	void testEditOwnerWithEmptyFields() {
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
 
-		addEditOwnerPO.setTelephone(newTelephone);
+		addEditOwnerPO.clearFields();
 		addEditOwnerPO.submit();
 
+		assertEquals("must not be empty", addEditOwnerPO.getFirstNameError());
+		assertEquals("must not be empty", addEditOwnerPO.getLastNameError());
+		assertEquals("must not be empty", addEditOwnerPO.getAddressError());
+		assertEquals("must not be empty", addEditOwnerPO.getCityError());
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
-		//assertEquals("must not be empty\nnumeric value out of bounds (<10 digits>.<0 digits> expected)", addEditOwnerPO.getTelephoneError());
 	}
 
 	@AfterAll

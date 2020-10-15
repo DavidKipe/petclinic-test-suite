@@ -30,9 +30,9 @@ public class NavBarPO extends PageObject {
 		return new FindOwnerPO(driver);
 	}
 
-	public FindOwnerPO goToVeterinarians() {
-		findOwnerBtn.click();
-		return new FindOwnerPO(driver);
+	public VetsPO goToVeterinarians() {
+		veterinariansBtn.click();
+		return new VetsPO(driver);
 	}
 
 }

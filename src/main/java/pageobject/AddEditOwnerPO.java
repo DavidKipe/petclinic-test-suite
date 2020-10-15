@@ -64,14 +64,18 @@ public class AddEditOwnerPO extends NavBarPO implements WrapsElement {
 		setTelephone(telephone);
 	}
 
-	public OwnerPO submit() {
-		submitButton.click();
-		return new OwnerPO(driver);
-	}
-
 	public OwnerPO fillFieldsAndSubmit(String firstName, String lastName, String address, String city, String telephone) {
 		fillFields(firstName, lastName, address, city, telephone);
 		return submit();
+	}
+
+	public void clearFields() {
+		fillFields("", "", "", "", "");
+	}
+
+	public OwnerPO submit() {
+		submitButton.click();
+		return new OwnerPO(driver);
 	}
 
 	public String getFirstNameError() {

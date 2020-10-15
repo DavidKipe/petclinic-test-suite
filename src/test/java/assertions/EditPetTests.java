@@ -42,8 +42,7 @@ public class EditPetTests extends BaseTests {
 	void testEditPetWithEmptyFields() {
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
-		addEditPetPO.setName("");
-		addEditPetPO.setBirthDate("");
+		addEditPetPO.clearFields();
 		addEditPetPO.submit();
 
 		assertEquals("is required", addEditPetPO.getNameError());

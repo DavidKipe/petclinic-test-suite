@@ -53,8 +53,7 @@ public class EditPetTests extends BaseTests {
 		re.startTest("editPetWithEmptyDescription");
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
-		addEditPetPO.setName("");
-		addEditPetPO.setBirthDate("");
+		addEditPetPO.clearFields();
 		addEditPetPO.submit();
 
 		re.check(driver, "editPetWithEmptyDescription");

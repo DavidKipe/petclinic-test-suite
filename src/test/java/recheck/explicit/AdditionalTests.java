@@ -34,7 +34,16 @@ public class AdditionalTests extends BaseTests {
 	@Test
 	void testWelcomeMessage() {
 		re.startTest("welcomeMessage");
+		homePO.goHome();
 		re.check(driver, "welcomeMessage");
+		re.capTest();
+	}
+
+	@Test
+	void testAtLeastOneVet() {
+		re.startTest("atLeastOneVet");
+		homePO.goToVeterinarians();
+		re.check(driver, "atLeastOneVet");
 		re.capTest();
 	}
 

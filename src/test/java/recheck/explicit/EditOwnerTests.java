@@ -74,12 +74,11 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
-	void testEditOwnerWithEmptyField() {
+	void testEditOwnerWithEmptyFields() {
 		re.startTest("editOwnerWithEmptyField");
 
-		String newTelephone = "";
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
-		addEditOwnerPO.setTelephone(newTelephone);
+		addEditOwnerPO.clearFields();
 		addEditOwnerPO.submit();
 
 		re.check(driver, "editOwnerWithEmptyField");

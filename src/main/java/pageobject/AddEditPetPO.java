@@ -40,6 +40,10 @@ public class AddEditPetPO extends NavBarPO {
 		return submit();
 	}
 
+	public void clearFields() {
+		fillFields("", "");
+	}
+
 	public OwnerPO submit() {
 		submitButton.click();
 		return new OwnerPO(driver);
