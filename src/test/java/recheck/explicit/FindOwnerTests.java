@@ -3,26 +3,25 @@ package recheck.explicit;
 import de.retest.recheck.Recheck;
 import de.retest.recheck.RecheckImpl;
 import de.retest.recheck.RecheckOptions;
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.FindOwnerPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import pageobject.OwnersListPO;
 import recheck.BaseTests;
 
 class FindOwnerTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	Recheck re;
 	WebDriver driver;
 
 	@BeforeEach
 	void createAndStartService() {
-		driver = DriverManager.getNewDriverInstance(BaseTests.BROWSER);
+		driver = getDriverInitialized();
 
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
@@ -31,7 +30,7 @@ class FindOwnerTests extends BaseTests {
 				.build();
 
 		re = new RecheckImpl(recheckOptions);
-		navBarPO = new NavBarPO(driver);
+		homePO = new HomePO(driver);
 	}
 
 
@@ -40,7 +39,7 @@ class FindOwnerTests extends BaseTests {
 		re.startTest("findExistingOwner");
 
 		String lastName = "Black";
-		navBarPO.goToFindOwner().searchFor(lastName);
+		homePO.goToFindOwner().searchFor(lastName);
 
 		re.check(driver, "findExistingOwner");
 		re.capTest();
@@ -50,7 +49,7 @@ class FindOwnerTests extends BaseTests {
 	void testFindNotExistingOwner() {
 		re.startTest("findNotExistingOwner");
 
-		FindOwnerPO findOwnerPO = navBarPO.goToFindOwner();
+		FindOwnerPO findOwnerPO = homePO.goToFindOwner();
 		findOwnerPO.searchFor("nobody");
 
 		re.check(driver, "findNotExistingOwner");
@@ -61,7 +60,7 @@ class FindOwnerTests extends BaseTests {
 	void testFindAllOwners() {
 		re.startTest("findAllOwners");
 
-		navBarPO.goToFindOwner().searchAll();
+		homePO.goToFindOwner().searchAll();
 
 		re.check(driver, "findAllOwners");
 		re.capTest();
@@ -72,7 +71,7 @@ class FindOwnerTests extends BaseTests {
 		re.startTest("findExistingOwnerFromAll");
 
 		String fullName = "George Franklin";
-		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
+		OwnersListPO ownersListPO = homePO.goToFindOwner().searchAll();
 		ownersListPO.clickOn(fullName);
 
 		re.check(driver, "findExistingOwnerFromAll");
@@ -81,7 +80,7 @@ class FindOwnerTests extends BaseTests {
 
 	@AfterEach
 	void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 		re.cap();
 	}
 

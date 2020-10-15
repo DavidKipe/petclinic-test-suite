@@ -1,40 +1,36 @@
 package assertions;
 
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import pageobject.FindOwnerPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import pageobject.OwnerPO;
 import pageobject.OwnersListPO;
-import recheck.BaseTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FindOwnerTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	@BeforeAll
 	static void createAndStartService() {
-		WebDriver driver = DriverManager.getNewDriverInstance(BROWSER);
-		navBarPO = new NavBarPO(driver);
+        homePO = new HomePO(getDriverInitialized());
 	}
 
 
 	@Test
 	void testFindExistingOwner() {
 		String lastName = "Black";
-		OwnerPO ownerPO = navBarPO.goToFindOwner().searchFor(lastName);
+		OwnerPO ownerPO = homePO.goToFindOwner().searchFor(lastName);
 
 		assertTrue(ownerPO.getName().contains(lastName)); // FIXME can be fail if there are more than one result
 	}
 
 	@Test
 	void testFindNotExistingOwner() {
-		FindOwnerPO findOwnerPO = navBarPO.goToFindOwner();
+		FindOwnerPO findOwnerPO = homePO.goToFindOwner();
 		findOwnerPO.searchFor("nobody");
 
 		assertEquals("has not been found", findOwnerPO.getNotFoundMessage());
@@ -42,7 +38,7 @@ class FindOwnerTests extends BaseTests {
 
 	@Test
 	void testFindAllOwners() {
-		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
+		OwnersListPO ownersListPO = homePO.goToFindOwner().searchAll();
 
 		assertFalse(ownersListPO.isThereOnlyOneOwner());
 	}
@@ -50,7 +46,7 @@ class FindOwnerTests extends BaseTests {
 	@Test
 	void testFindExistingOwnerFromAll() {
 		String fullName = "George Franklin";
-		OwnersListPO ownersListPO = navBarPO.goToFindOwner().searchAll();
+		OwnersListPO ownersListPO = homePO.goToFindOwner().searchAll();
 		OwnerPO ownerPO = ownersListPO.clickOn(fullName);
 
 		assertEquals(ownerPO.getName(), fullName);
@@ -58,7 +54,7 @@ class FindOwnerTests extends BaseTests {
 
 	@AfterAll
 	static void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 	}
 
 }

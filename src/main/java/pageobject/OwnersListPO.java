@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class OwnersListPO extends PageObject {
+public class OwnersListPO extends NavBarPO {
 
 	OwnersListPO(WebDriver driver) {
 		super(driver);

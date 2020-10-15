@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class AddEditPetPO extends PageObject {
+public class AddEditPetPO extends NavBarPO {
 
 	@FindBy(how = How.XPATH, xpath = "//input[@id='name']")
 	private WebElement nameInput;

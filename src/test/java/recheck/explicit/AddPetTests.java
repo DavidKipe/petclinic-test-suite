@@ -3,18 +3,17 @@ package recheck.explicit;
 import de.retest.recheck.Recheck;
 import de.retest.recheck.RecheckImpl;
 import de.retest.recheck.RecheckOptions;
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.AddEditPetPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import recheck.BaseTests;
 
 class AddPetTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	private final String lastName = "Black";
 
@@ -23,7 +22,7 @@ class AddPetTests extends BaseTests {
 
 	@BeforeEach
 	void createAndStartService() {
-		driver = DriverManager.getNewDriverInstance(BaseTests.BROWSER);
+		driver = getDriverInitialized();
 
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
@@ -32,7 +31,7 @@ class AddPetTests extends BaseTests {
 				.build();
 
 		re = new RecheckImpl(recheckOptions);
-		navBarPO = new NavBarPO(driver);
+		homePO = new HomePO(driver);
 	}
 
 	@Test
@@ -42,7 +41,7 @@ class AddPetTests extends BaseTests {
 		String name = "Arnold";
 		String birthDate = "2017-11-30";
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 		addEditPetPO.fillFieldsAndSubmit(name, birthDate);
 
 		// NOTE fail if it is not a clean run because the name is already in use (these tests don't clean up)
@@ -55,7 +54,7 @@ class AddPetTests extends BaseTests {
 	@Test
 	void testAddPetToOwnerWithEmptyFields() {
 		re.startTest("addPetToOwnerWithEmptyFields");
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).addPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
 		addEditPetPO.submit();
 
@@ -65,7 +64,7 @@ class AddPetTests extends BaseTests {
 
 	@AfterEach
 	void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 		re.cap();
 	}
 

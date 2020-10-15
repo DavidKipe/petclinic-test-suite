@@ -7,7 +7,7 @@ import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class AddEditOwnerPO extends PageObject implements WrapsElement {
+public class AddEditOwnerPO extends NavBarPO implements WrapsElement {
 
 	@FindBy(how = How.XPATH, xpath = "//input[@id='firstName']")
 	private WebElement firstNameInput;

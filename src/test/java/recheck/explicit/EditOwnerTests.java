@@ -3,18 +3,17 @@ package recheck.explicit;
 import de.retest.recheck.Recheck;
 import de.retest.recheck.RecheckImpl;
 import de.retest.recheck.RecheckOptions;
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.AddEditOwnerPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import recheck.BaseTests;
 
 class EditOwnerTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	private final String lastName = "Black"; // lastname to find and test
 
@@ -23,7 +22,7 @@ class EditOwnerTests extends BaseTests {
 
 	@BeforeEach
 	void createAndStartService() {
-		driver = DriverManager.getNewDriverInstance(BaseTests.BROWSER);
+		driver = getDriverInitialized();
 
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
@@ -32,7 +31,7 @@ class EditOwnerTests extends BaseTests {
 				.build();
 
 		re = new RecheckImpl(recheckOptions);
-		navBarPO = new NavBarPO(driver);
+		homePO = new HomePO(driver);
 	}
 
 	@Test
@@ -40,7 +39,7 @@ class EditOwnerTests extends BaseTests {
 		re.startTest("editOwnerWithValidData");
 
 		String newFirstName = "Bob"; // new first name
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setFirstName(newFirstName);
 		addEditOwnerPO.submit();
 
@@ -53,7 +52,7 @@ class EditOwnerTests extends BaseTests {
 		re.startTest("editOwnerLongTelephone");
 
 		String newTelephone = "010123456789";
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
 		addEditOwnerPO.submit();
 
@@ -66,7 +65,7 @@ class EditOwnerTests extends BaseTests {
 		re.startTest("editOwnerNotNumericTelephone");
 
 		String newTelephone = "abcdef";
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
 		addEditOwnerPO.submit();
 
@@ -79,7 +78,7 @@ class EditOwnerTests extends BaseTests {
 		re.startTest("editOwnerWithEmptyField");
 
 		String newTelephone = "";
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().searchFor(lastName).edit();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
 		addEditOwnerPO.setTelephone(newTelephone);
 		addEditOwnerPO.submit();
 
@@ -89,7 +88,7 @@ class EditOwnerTests extends BaseTests {
 
 	@AfterEach
 	void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 		re.cap();
 	}
 

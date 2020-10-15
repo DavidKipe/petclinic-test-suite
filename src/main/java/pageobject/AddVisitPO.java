@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class AddVisitPO extends PageObject {
+public class AddVisitPO extends NavBarPO {
 
 	@FindBy(how = How.XPATH, xpath = "//input[@id='date']")
 	private WebElement dateInput;

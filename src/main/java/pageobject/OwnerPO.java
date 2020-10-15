@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class OwnerPO extends PageObject implements WrapsElement {
+public class OwnerPO extends NavBarPO implements WrapsElement {
 
 	OwnerPO(WebDriver driver) {
 		super(driver);

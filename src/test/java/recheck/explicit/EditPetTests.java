@@ -3,18 +3,17 @@ package recheck.explicit;
 import de.retest.recheck.Recheck;
 import de.retest.recheck.RecheckImpl;
 import de.retest.recheck.RecheckOptions;
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobject.AddEditPetPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import recheck.BaseTests;
 
-public class EditPetTests {
+public class EditPetTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	private final String lastName = "Black";
 
@@ -23,7 +22,7 @@ public class EditPetTests {
 
 	@BeforeEach
 	void createAndStartService() {
-		driver = DriverManager.getNewDriverInstance(BaseTests.BROWSER);
+		driver = getDriverInitialized();
 
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
@@ -32,7 +31,7 @@ public class EditPetTests {
 				.build();
 
 		re = new RecheckImpl(recheckOptions);
-		navBarPO = new NavBarPO(driver);
+		homePO = new HomePO(driver);
 	}
 
 	@Test
@@ -41,7 +40,7 @@ public class EditPetTests {
 		String name = "Arnold Jr.";
 		String birthDate = "2019-11-30";
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
 		addEditPetPO.fillFieldsAndSubmit(name, birthDate);
 
@@ -52,7 +51,7 @@ public class EditPetTests {
 	@Test
 	void testEditPetWithEmptyFields() {
 		re.startTest("editPetWithEmptyDescription");
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
 		addEditPetPO.setName("");
 		addEditPetPO.setBirthDate("");
@@ -64,7 +63,7 @@ public class EditPetTests {
 
 	@AfterEach
 	void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 		re.cap();
 	}
 

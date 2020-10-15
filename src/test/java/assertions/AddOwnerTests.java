@@ -1,21 +1,18 @@
 package assertions;
 
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import pageobject.AddEditOwnerPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import pageobject.OwnerPO;
-import recheck.BaseTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddOwnerTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	private final String firstName = "Mario";
     private final String lastName = "Rossi";
@@ -25,13 +22,12 @@ class AddOwnerTests extends BaseTests {
 
 	@BeforeAll
     static void createAndStartService() {
-        WebDriver driver = DriverManager.getNewDriverInstance(BROWSER);
-        navBarPO = new NavBarPO(driver);
+        homePO = new HomePO(getDriverInitialized());
     }
 
     @Test
     void testAddOwnerWithValidData() {
-        AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+        AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
         OwnerPO ownerPO = addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
 
@@ -43,7 +39,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithEmptyFirstName() {
-        AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+        AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit("", lastName, address, city, telephone);
 
@@ -52,7 +48,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithEmptyLastName() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, "", address, city, telephone);
 
@@ -61,7 +57,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithEmptyAddress() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, "", city, telephone);
 
@@ -70,7 +66,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithEmptyCity() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, "", telephone);
 
@@ -79,7 +75,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithEmptyTelephone() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "");
 
@@ -88,7 +84,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithLongTelephone() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "010123456789");
 
@@ -97,7 +93,7 @@ class AddOwnerTests extends BaseTests {
 
     @Test
     void testAddOwnerWithNotNumericTelephone() {
-		AddEditOwnerPO addEditOwnerPO = navBarPO.goToFindOwner().goToAddOwner();
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 
 	    addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "abcdef");
 
@@ -106,7 +102,7 @@ class AddOwnerTests extends BaseTests {
 
     @AfterAll
     static void closeDriver() {
-        navBarPO.closeDriver();
+        homePO.closeDriver();
     }
 
 }

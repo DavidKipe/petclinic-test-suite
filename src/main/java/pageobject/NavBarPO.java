@@ -7,15 +7,30 @@ import org.openqa.selenium.support.How;
 
 public class NavBarPO extends PageObject {
 
+	@FindBy(how = How.XPATH, xpath = "//a[@title='home page']")
+	private WebElement homeBtn;
+
 	@FindBy(how = How.XPATH, xpath = "//a[@title='find owners']")
 	private WebElement findOwnerBtn;
 
+	@FindBy(how = How.XPATH, xpath = "//a[@title='veterinarians']")
+	private WebElement veterinariansBtn;
+
 	public NavBarPO(WebDriver driver) {
 		super(driver);
-		driver.get("http://localhost:8080");
+	}
+
+	public HomePO goHome() {
+		homeBtn.click();
+		return new HomePO(driver);
 	}
 
 	public FindOwnerPO goToFindOwner() {
+		findOwnerBtn.click();
+		return new FindOwnerPO(driver);
+	}
+
+	public FindOwnerPO goToVeterinarians() {
 		findOwnerBtn.click();
 		return new FindOwnerPO(driver);
 	}

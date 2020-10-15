@@ -1,13 +1,11 @@
 package assertions;
 
 import dataclass.Pet;
-import driver.DriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import pageobject.AddEditPetPO;
-import pageobject.NavBarPO;
+import pageobject.HomePO;
 import pageobject.OwnerPO;
 
 import java.util.List;
@@ -17,14 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EditPetTests extends BaseTests {
 
-	private static NavBarPO navBarPO;
+	private static HomePO homePO;
 
 	private final String lastName = "Black";
 
 	@BeforeAll
 	static void createAndStartService() {
-		WebDriver driver = DriverManager.getNewDriverInstance(BROWSER);
-		navBarPO = new NavBarPO(driver);
+        homePO = new HomePO(getDriverInitialized());
 	}
 
 	@Test
@@ -32,7 +29,7 @@ public class EditPetTests extends BaseTests {
 		String name = "Arnold Jr.";
 		String birthDate = "2019-11-30";
 
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
 		OwnerPO ownerPO = addEditPetPO.fillFieldsAndSubmit(name, birthDate);
 
@@ -43,7 +40,7 @@ public class EditPetTests extends BaseTests {
 
 	@Test
 	void testEditPetWithEmptyFields() {
-		AddEditPetPO addEditPetPO = navBarPO.goToFindOwner().searchFor(lastName).editFirstPet();
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
 		addEditPetPO.setName("");
 		addEditPetPO.setBirthDate("");
@@ -55,7 +52,7 @@ public class EditPetTests extends BaseTests {
 
 	@AfterAll
 	static void closeDriver() {
-		navBarPO.closeDriver();
+		homePO.closeDriver();
 	}
 
 }
