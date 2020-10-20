@@ -31,10 +31,10 @@ class AddOwnerTests extends BaseTests {
 
         OwnerPO ownerPO = addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
 
-        assertEquals(ownerPO.getName(), firstName + " " + lastName);
-        assertEquals(ownerPO.getAddress(), address);
-        assertEquals(ownerPO.getCity(), city);
-        assertEquals(ownerPO.getTelephone(), telephone);
+        assertEquals(firstName + " " + lastName, ownerPO.getName());
+        assertEquals(address, ownerPO.getAddress());
+        assertEquals(city, ownerPO.getCity());
+        assertEquals(telephone, ownerPO.getTelephone());
     }
 
     @Test

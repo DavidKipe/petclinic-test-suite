@@ -30,7 +30,7 @@ class EditOwnerTests extends BaseTests {
 		addEditOwnerPO.setFirstName(newFirstName);
 		OwnerPO ownerPO = addEditOwnerPO.submit();
 
-		assertEquals(ownerPO.getName(), newFirstName + " " + lastName);
+		assertEquals(newFirstName + " " + lastName, ownerPO.getName());
 	}
 
 	@Test

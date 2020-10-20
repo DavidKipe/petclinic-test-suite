@@ -49,7 +49,7 @@ class FindOwnerTests extends BaseTests {
 		OwnersListPO ownersListPO = homePO.goToFindOwner().searchAll();
 		OwnerPO ownerPO = ownersListPO.clickOn(fullName);
 
-		assertEquals(ownerPO.getName(), fullName);
+		assertEquals(fullName, ownerPO.getName());
 	}
 
 	@AfterAll
