@@ -1,8 +1,8 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.HomePO;
 import pageobject.VetsPO;
@@ -13,8 +13,8 @@ public class AdditionalTests extends BaseTests {
 
 	private static HomePO homePO;
 
-	@BeforeAll
-	static void createAndStartService() {
+	@BeforeEach
+	void createAndStartService() {
         homePO = new HomePO(getDriverInitialized());
 	}
 
@@ -30,8 +30,8 @@ public class AdditionalTests extends BaseTests {
 		Assertions.assertFalse(vetsPO.getFirstVetName().isEmpty());
 	}
 
-	@AfterAll
-	static void closeDriver() {
+	@AfterEach
+	void closeDriver() {
 		homePO.closeDriver();
 	}
 

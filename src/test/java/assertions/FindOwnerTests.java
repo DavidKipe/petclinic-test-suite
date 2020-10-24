@@ -1,7 +1,7 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.FindOwnerPO;
 import pageobject.HomePO;
@@ -14,8 +14,8 @@ class FindOwnerTests extends BaseTests {
 
 	private static HomePO homePO;
 
-	@BeforeAll
-	static void createAndStartService() {
+	@BeforeEach
+	void createAndStartService() {
         homePO = new HomePO(getDriverInitialized());
 	}
 
@@ -52,8 +52,8 @@ class FindOwnerTests extends BaseTests {
 		assertEquals(fullName, ownerPO.getName());
 	}
 
-	@AfterAll
-	static void closeDriver() {
+	@AfterEach
+	void closeDriver() {
 		homePO.closeDriver();
 	}
 

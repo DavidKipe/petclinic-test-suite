@@ -1,8 +1,8 @@
 package assertions;
 
 import dataclass.Pet;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.AddEditPetPO;
 import pageobject.HomePO;
@@ -19,8 +19,8 @@ class AddPetTests extends BaseTests {
 
 	private final String lastName = "Black";
 
-	@BeforeAll
-	static void createAndStartService() {
+	@BeforeEach
+	void createAndStartService() {
         homePO = new HomePO(getDriverInitialized());
 	}
 
@@ -50,8 +50,8 @@ class AddPetTests extends BaseTests {
 		assertEquals("is required", addEditPetPO.getBirthDateError());
 	}
 
-	@AfterAll
-	static void closeDriver() {
+	@AfterEach
+	void closeDriver() {
 		homePO.closeDriver();
 	}
 

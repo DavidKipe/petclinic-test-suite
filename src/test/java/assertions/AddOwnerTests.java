@@ -1,7 +1,7 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.AddEditOwnerPO;
 import pageobject.HomePO;
@@ -20,8 +20,8 @@ class AddOwnerTests extends BaseTests {
     private final String city = "Genova";
     private final String telephone = "010123456";
 
-	@BeforeAll
-    static void createAndStartService() {
+	@BeforeEach
+    void createAndStartService() {
         homePO = new HomePO(getDriverInitialized());
     }
 
@@ -100,8 +100,8 @@ class AddOwnerTests extends BaseTests {
         assertTrue(addEditOwnerPO.getTelephoneError().contains("numeric value out of bounds (<10 digits>.<0 digits> expected)"));
     }
 
-    @AfterAll
-    static void closeDriver() {
+    @AfterEach
+    void closeDriver() {
         homePO.closeDriver();
     }
 

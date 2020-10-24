@@ -1,7 +1,7 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.AddEditOwnerPO;
 import pageobject.HomePO;
@@ -16,8 +16,8 @@ class EditOwnerTests extends BaseTests {
 
 	private final String lastName = "Black"; // lastname to find and test
 
-	@BeforeAll
-	static void createAndStartService() {
+	@BeforeEach
+	void createAndStartService() {
         homePO = new HomePO(getDriverInitialized());
 	}
 
@@ -69,8 +69,8 @@ class EditOwnerTests extends BaseTests {
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
 	}
 
-	@AfterAll
-	static void closeDriver() {
+	@AfterEach
+	void closeDriver() {
 		homePO.closeDriver();
 	}
 
