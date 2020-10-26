@@ -17,7 +17,7 @@ public class AddVisitTests extends BaseTests {
 
 	private static HomePO homePO;
 
-	private final String lastName = "Black";
+	private final String lastName = "Rodriquez";
 	private final String date = "2020-10-30";
 
 	@BeforeEach

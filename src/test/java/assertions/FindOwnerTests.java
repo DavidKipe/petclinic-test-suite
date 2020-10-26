@@ -22,7 +22,7 @@ class FindOwnerTests extends BaseTests {
 
 	@Test
 	void testFindExistingOwner() {
-		String lastName = "Black";
+		String lastName = "McTavish";
 		OwnerPO ownerPO = homePO.goToFindOwner().searchFor(lastName);
 
 		assertTrue(ownerPO.getName().contains(lastName)); // FIXME can be fail if there are more than one result

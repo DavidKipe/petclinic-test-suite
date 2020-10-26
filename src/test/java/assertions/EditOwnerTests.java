@@ -14,7 +14,7 @@ class EditOwnerTests extends BaseTests {
 
 	private static HomePO homePO;
 
-	private final String lastName = "Black"; // lastname to find and test
+	private final String lastName = "Coleman"; // lastname to find and test
 
 	@BeforeEach
 	void createAndStartService() {

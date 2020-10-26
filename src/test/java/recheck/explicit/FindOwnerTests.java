@@ -38,7 +38,7 @@ class FindOwnerTests extends BaseTests {
 	void testFindExistingOwner() {
 		re.startTest("findExistingOwner");
 
-		String lastName = "Black";
+		String lastName = "McTavish";
 		homePO.goToFindOwner().searchFor(lastName);
 
 		re.check(driver, "findExistingOwner");

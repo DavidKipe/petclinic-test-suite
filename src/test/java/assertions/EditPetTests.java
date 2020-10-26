@@ -17,7 +17,7 @@ public class EditPetTests extends BaseTests {
 
 	private static HomePO homePO;
 
-	private final String lastName = "Black";
+	private final String lastName = "Schroeder";
 
 	@BeforeEach
 	void createAndStartService() {
