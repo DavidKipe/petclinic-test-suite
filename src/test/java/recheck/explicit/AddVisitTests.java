@@ -16,6 +16,7 @@ public class AddVisitTests extends BaseTests {
 	private static HomePO homePO;
 
 	private final String lastName = "Black";
+	private final String date = "2020-10-30";
 
 	Recheck re;
 	WebDriver driver;
@@ -37,7 +38,6 @@ public class AddVisitTests extends BaseTests {
 	@Test
 	void testAddVisitToPet() {
 		re.startTest("addVisitToPet");
-		String date = "2020-10-30";
 		String description = "Routine";
 
 		AddVisitPO addVisitPO = homePO.goToFindOwner().searchFor(lastName).addVisitToFirstPet();
@@ -53,6 +53,7 @@ public class AddVisitTests extends BaseTests {
 		re.startTest("addVisitToPetWithEmptyDescription");
 		AddVisitPO addVisitPO = homePO.goToFindOwner().searchFor(lastName).addVisitToFirstPet();
 
+		addVisitPO.setDate(date);
 		addVisitPO.submit();
 
 		re.check(driver, "addVisitToPetWithEmptyDescription");
