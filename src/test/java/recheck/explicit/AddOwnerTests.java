@@ -1,20 +1,10 @@
 package recheck.explicit;
 
-import de.retest.recheck.Recheck;
-import de.retest.recheck.RecheckImpl;
-import de.retest.recheck.RecheckOptions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import pageobject.AddEditOwnerPO;
-import pageobject.HomePO;
-import recheck.BaseTests;
 
 
 class AddOwnerTests extends BaseTests {
-
-	private static HomePO homePO;
 
 	private final String firstName = "Mario";
 	private final String lastName = "Rossi";
@@ -22,99 +12,68 @@ class AddOwnerTests extends BaseTests {
 	private final String city = "Genova";
 	private final String telephone = "010123456";
 
-	Recheck re;
-	WebDriver driver;
-
-	@BeforeEach
-	void createAndStartService() {
-		driver = getDriverInitialized();
-
-		RecheckOptions recheckOptions = RecheckOptions.builder()
-				//.enableReportUpload()
-				.addIgnore("addowner_help_errors.filter.js")
-				//.addIgnore("addowner.filter")
-				.build();
-		re = new RecheckImpl(recheckOptions);
-
-		homePO = new HomePO(driver);
-	}
-
 	@Test
 	void testAddOwnerWithValidData() {
-		re.startTest("addOwnerWithValidData");
+		startTest("addOwnerWithValidData");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, telephone);
-		re.check(driver, "addOwnerWithValidData");
-		re.capTest();
+		endTest("addOwnerWithValidData");
 	}
 
 	@Test
 	void testAddOwnerWithEmptyFirstName() {
-		re.startTest("addOwnerWithEmptyFirstName");
+		startTest("addOwnerWithEmptyFirstName");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit("", lastName, address, city, telephone);
-		re.check(driver, "addOwnerWithEmptyFirstName");
-		re.capTest();
+		endTest("addOwnerWithEmptyFirstName");
 	}
 
 	@Test
 	void testAddOwnerWithEmptyLastName() {
-		re.startTest("addOwnerWithEmptyLastName");
+		startTest("addOwnerWithEmptyLastName");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, "", address, city, telephone);
-		re.check(driver, "addOwnerWithEmptyLastName");
-		re.capTest();
+		endTest("addOwnerWithEmptyLastName");
 	}
 
 	@Test
 	void testAddOwnerWithEmptyAddress() {
-		re.startTest("addOwnerWithEmptyAddress");
+		startTest("addOwnerWithEmptyAddress");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, "", city, telephone);
-		re.check(driver, "addOwnerWithEmptyAddress");
-		re.capTest();
+		endTest("addOwnerWithEmptyAddress");
 	}
 
 	@Test
 	void testAddOwnerWithEmptyCity() {
-		re.startTest("addOwnerWithEmptyCity");
+		startTest("addOwnerWithEmptyCity");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, "", telephone);
-		re.check(driver, "addOwnerWithEmptyCity");
-		re.capTest();
+		endTest("addOwnerWithEmptyCity");
 	}
 
 	@Test
 	void testAddOwnerWithEmptyTelephone() {
-		re.startTest("addOwnerWithEmptyTelephone");
+		startTest("addOwnerWithEmptyTelephone");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "");
-		re.check(driver, "addOwnerWithEmptyTelephone");
-		re.capTest();
+		endTest("addOwnerWithEmptyTelephone");
 	}
 
 	@Test
 	void testAddOwnerWithLongTelephone() {
-		re.startTest("addOwnerWithLongTelephone");
+		startTest("addOwnerWithLongTelephone");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "010123456789");
-		re.check(driver, "addOwnerWithLongTelephone");
-		re.capTest();
+		endTest("addOwnerWithLongTelephone");
 	}
 
 	@Test
 	void testAddOwnerWithNotNumericTelephone() {
-		re.startTest("addOwnerWithNotNumericTelephone");
+		startTest("addOwnerWithNotNumericTelephone");
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().goToAddOwner();
 		addEditOwnerPO.fillFieldsAndSubmit(firstName, lastName, address, city, "abcdef");
-		re.check(driver, "addOwnerWithNotNumericTelephone");
-		re.capTest();
-	}
-
-	@AfterEach
-	void closeDriver() {
-		homePO.closeDriver();
-		re.cap();
+		endTest("addOwnerWithNotNumericTelephone");
 	}
 
 }

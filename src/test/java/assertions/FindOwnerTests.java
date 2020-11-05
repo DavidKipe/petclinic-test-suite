@@ -1,24 +1,13 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.FindOwnerPO;
-import pageobject.HomePO;
 import pageobject.OwnerPO;
 import pageobject.OwnersListPO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FindOwnerTests extends BaseTests {
-
-	private static HomePO homePO;
-
-	@BeforeEach
-	void createAndStartService() {
-        homePO = new HomePO(getDriverInitialized());
-	}
-
 
 	@Test
 	void testFindExistingOwner() {
@@ -50,11 +39,6 @@ class FindOwnerTests extends BaseTests {
 		OwnerPO ownerPO = ownersListPO.clickOn(fullName);
 
 		assertEquals(fullName, ownerPO.getName());
-	}
-
-	@AfterEach
-	void closeDriver() {
-		homePO.closeDriver();
 	}
 
 }

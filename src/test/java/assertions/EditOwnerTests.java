@@ -1,10 +1,7 @@
 package assertions;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.api.Test;
 import pageobject.AddEditOwnerPO;
-import pageobject.HomePO;
 import pageobject.OwnerPO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,14 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EditOwnerTests extends BaseTests {
 
-	private static HomePO homePO;
-
 	private final String lastName = "Coleman"; // lastname to find and test
-
-	@BeforeEach
-	void createAndStartService() {
-        homePO = new HomePO(getDriverInitialized());
-	}
 
 	@Test
 	void testEditOwnerWithValidData() {
@@ -67,11 +57,6 @@ class EditOwnerTests extends BaseTests {
 		assertEquals("must not be empty", addEditOwnerPO.getAddressError());
 		assertEquals("must not be empty", addEditOwnerPO.getCityError());
 		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
-	}
-
-	@AfterEach
-	void closeDriver() {
-		homePO.closeDriver();
 	}
 
 }

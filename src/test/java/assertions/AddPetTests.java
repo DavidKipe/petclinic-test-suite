@@ -1,11 +1,8 @@
 package assertions;
 
 import dataclass.Pet;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pageobject.AddEditPetPO;
-import pageobject.HomePO;
 import pageobject.OwnerPO;
 
 import java.util.List;
@@ -15,14 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddPetTests extends BaseTests {
 
-	private static HomePO homePO;
-
 	private final String lastName = "Black";
-
-	@BeforeEach
-	void createAndStartService() {
-        homePO = new HomePO(getDriverInitialized());
-	}
 
 	@Test
 	void testAddPetToOwner() {
@@ -48,11 +38,6 @@ class AddPetTests extends BaseTests {
 
 		assertEquals("is required", addEditPetPO.getNameError());
 		assertEquals("is required", addEditPetPO.getBirthDateError());
-	}
-
-	@AfterEach
-	void closeDriver() {
-		homePO.closeDriver();
 	}
 
 }

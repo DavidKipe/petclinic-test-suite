@@ -45,7 +45,7 @@ public class DriverManager {
 			case CHROME:
 				setChromeWebDriver();
 				ChromeOptions options = new ChromeOptions();
-				options.addArguments("--headless", "--window-size=1280,720");
+				options.addArguments("--headless", "--window-size=1280,720", "-js-flags=--expose-gc");
 				driver = new ChromeDriver(options);
 				break;
 			case FIREFOX:
