@@ -13,7 +13,7 @@ public class DriverManager {
 		CHROME, FIREFOX
 	}
 
-	public static final int TIMEOUT_SECS = 5;                                   // parameter for waiting timeout in seconds
+	public static final int TIMEOUT_SECS = 0;                                   // parameter for waiting timeout in seconds
 	public static final String DRIVER_FOLDER_NAME = "/home/david/.webdriver/";  // parameter for the folder of the web drivers
 
 	public static final String CHROME_DRIVER_UNIX = "chromedriver";

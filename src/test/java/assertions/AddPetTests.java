@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AddPetTests extends BaseTests {
 
 	private final String lastName = "Black";
+
+	private final String petName = "Arnold";
 	private final String petBirthDate = "2017-11-30";
 
 	@Test
 	void testAddPetToOwner() {
-		String petName = "Arnold";
-
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
 		OwnerPO ownerPO = addEditPetPO.fillFieldsAndSubmit(petName, petBirthDate);
@@ -31,22 +31,32 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void testAddPetToOwnerWithEmptyFields() {
+	void testAddPetToOwnerWithEmptyName() {
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
+		addEditPetPO.setBirthDate(petBirthDate);
 		addEditPetPO.submit();
 
 		assertEquals("is required", addEditPetPO.getNameError());
+	}
+
+	@Test
+	void testAddPetToOwnerWithEmptyBirthDate() {
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
+
+		addEditPetPO.setName(petName);
+		addEditPetPO.submit();
+
 		assertEquals("is required", addEditPetPO.getBirthDateError());
 	}
 
 	@Test
 	void testAddPetToOwnerDuplicateName() {
-		String petName = "Lucky";
+		String duplicatePetName = "Lucky";
 
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
-		addEditPetPO.fillFieldsAndSubmit(petName, petBirthDate);
+		addEditPetPO.fillFieldsAndSubmit(duplicatePetName, petBirthDate);
 
 		assertEquals("is already in use", addEditPetPO.getNameError());
 	}

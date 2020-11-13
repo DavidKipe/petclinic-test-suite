@@ -1,6 +1,6 @@
 package assertions;
 
- import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import pageobject.AddEditOwnerPO;
 import pageobject.OwnerPO;
 
@@ -24,6 +24,56 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
+	void testEditOwnerWithEmptyFirstName() {
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+
+		addEditOwnerPO.setFirstName("");
+		addEditOwnerPO.submit();
+
+		assertTrue(addEditOwnerPO.getFirstNameError().contains("must not be empty"));
+	}
+
+	@Test
+	void testEditOwnerWithEmptyLastName() {
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+
+		addEditOwnerPO.setLastName("");
+		addEditOwnerPO.submit();
+
+		assertTrue(addEditOwnerPO.getLastNameError().contains("must not be empty"));
+	}
+
+	@Test
+	void testEditOwnerWithEmptyAddress() {
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+
+		addEditOwnerPO.setAddress("");
+		addEditOwnerPO.submit();
+
+		assertTrue(addEditOwnerPO.getAddressError().contains("must not be empty"));
+	}
+
+	@Test
+	void testEditOwnerWithEmptyCity() {
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+
+		addEditOwnerPO.setCity("");
+		addEditOwnerPO.submit();
+
+		assertTrue(addEditOwnerPO.getCityError().contains("must not be empty"));
+	}
+
+	@Test
+	void testEditOwnerWithEmptyTelephone() {
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+
+		addEditOwnerPO.setTelephone("");
+		addEditOwnerPO.submit();
+
+		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
+	}
+
+	@Test
 	void testEditOwnerLongTelephone() {
 		String newTelephone = "010123456789";
 		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
@@ -42,21 +92,7 @@ class EditOwnerTests extends BaseTests {
 		addEditOwnerPO.setTelephone(newTelephone);
 		addEditOwnerPO.submit();
 
-		assertEquals("numeric value out of bounds (<10 digits>.<0 digits> expected)", addEditOwnerPO.getTelephoneError());
-	}
-
-	@Test
-	void testEditOwnerWithEmptyFields() {
-		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
-
-		addEditOwnerPO.clearFields();
-		addEditOwnerPO.submit();
-
-		assertEquals("must not be empty", addEditOwnerPO.getFirstNameError());
-		assertEquals("must not be empty", addEditOwnerPO.getLastNameError());
-		assertEquals("must not be empty", addEditOwnerPO.getAddressError());
-		assertEquals("must not be empty", addEditOwnerPO.getCityError());
-		assertTrue(addEditOwnerPO.getTelephoneError().contains("must not be empty"));
+		assertTrue(addEditOwnerPO.getTelephoneError().contains("numeric value out of bounds (<10 digits>.<0 digits> expected)"));
 	}
 
 }

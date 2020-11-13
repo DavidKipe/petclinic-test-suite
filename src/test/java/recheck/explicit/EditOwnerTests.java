@@ -20,6 +20,51 @@ class EditOwnerTests extends BaseTests {
 	}
 
 	@Test
+	void testEditOwnerWithEmptyFirstName() {
+		startTest("editOwnerWithEmptyFirstName");
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+		addEditOwnerPO.setFirstName("");
+		addEditOwnerPO.submit();
+		endTest("editOwnerWithEmptyFirstName");
+	}
+
+	@Test
+	void testEditOwnerWithEmptyLastName() {
+		startTest("editOwnerWithEmptyLastName");
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+		addEditOwnerPO.setLastName("");
+		addEditOwnerPO.submit();
+		endTest("editOwnerWithEmptyLastName");
+	}
+
+	@Test
+	void testEditOwnerWithEmptyAddress() {
+		startTest("editOwnerWithEmptyAddress");
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+		addEditOwnerPO.setAddress("");
+		addEditOwnerPO.submit();
+		endTest("editOwnerWithEmptyAddress");
+	}
+
+	@Test
+	void testEditOwnerWithEmptyCity() {
+		startTest("editOwnerWithEmptyCity");
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+		addEditOwnerPO.setCity("");
+		addEditOwnerPO.submit();
+		endTest("editOwnerWithEmptyCity");
+	}
+
+	@Test
+	void testEditOwnerWithEmptyTelephone() {
+		startTest("editOwnerWithEmptyTelephone");
+		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
+		addEditOwnerPO.setTelephone("");
+		addEditOwnerPO.submit();
+		endTest("editOwnerWithEmptyTelephone");
+	}
+
+	@Test
 	void testEditOwnerLongTelephone() {
 		startTest("editOwnerLongTelephone");
 
@@ -41,17 +86,6 @@ class EditOwnerTests extends BaseTests {
 		addEditOwnerPO.submit();
 
 		endTest("editOwnerNotNumericTelephone");
-	}
-
-	@Test
-	void testEditOwnerWithEmptyFields() {
-		startTest("editOwnerWithEmptyField");
-
-		AddEditOwnerPO addEditOwnerPO = homePO.goToFindOwner().searchFor(lastName).edit();
-		addEditOwnerPO.clearFields();
-		addEditOwnerPO.submit();
-
-		endTest("editOwnerWithEmptyField");
 	}
 
 }

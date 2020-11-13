@@ -6,13 +6,13 @@ import pageobject.AddEditPetPO;
 class AddPetTests extends BaseTests {
 
 	private final String lastName = "Black";
+
 	private final String petBirthDate = "2017-11-30";
+	private final String petName = "Arnold";
 
 	@Test
 	void testAddPetToOwner() {
 		startTest("addPetToOwner");
-
-		String petName = "Arnold";
 
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 		addEditPetPO.fillFieldsAndSubmit(petName, petBirthDate);
@@ -24,24 +24,36 @@ class AddPetTests extends BaseTests {
 	}
 
 	@Test
-	void testAddPetToOwnerWithEmptyFields() {
-		startTest("addPetToOwnerWithEmptyFields");
+	void testAddPetToOwnerWithEmptyName() {
+		startTest("addPetToOwnerWithEmptyName");
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
+		addEditPetPO.setBirthDate(petBirthDate);
 		addEditPetPO.submit();
 
-		endTest("addPetToOwnerWithEmptyFields");
+		endTest("addPetToOwnerWithEmptyName");
+	}
+
+	@Test
+	void testAddPetToOwnerWithEmptyBirthDate() {
+		startTest("addPetToOwnerWithEmptyBirthDate");
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
+
+		addEditPetPO.setName(petName);
+		addEditPetPO.submit();
+
+		endTest("addPetToOwnerWithEmptyBirthDate");
 	}
 
 	@Test
 	void testAddPetToOwnerDuplicateName() {
 		startTest("addPetToOwnerDuplicateName");
 
-		String petName = "Lucky";
+		String duplicatePetName = "Lucky";
 
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).addPet();
 
-		addEditPetPO.fillFieldsAndSubmit(petName, petBirthDate);
+		addEditPetPO.fillFieldsAndSubmit(duplicatePetName, petBirthDate);
 
 		endTest("addPetToOwnerDuplicateName");
 	}

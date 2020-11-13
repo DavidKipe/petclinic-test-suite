@@ -12,8 +12,6 @@ class BaseTests {
 
 	private static final String APP_HOME_URL = "http://localhost:8080";
 
-	private WebDriver webDriver;
-
 	protected HomePO homePO;
 
 	public static WebDriver getDriverInitialized() {
@@ -37,7 +35,7 @@ class BaseTests {
 
 	@BeforeEach
 	void createAndStartService() {
-		webDriver = getDriverInitialized();
+		WebDriver webDriver = getDriverInitialized();
         homePO = new HomePO(webDriver);
 	}
 

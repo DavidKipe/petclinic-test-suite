@@ -16,26 +16,35 @@ public class EditPetTests extends BaseTests {
 
 	@Test
 	void testEditPetWithValidData() {
-		String name = "Arnold Jr.";
-		String birthDate = "2019-11-30";
+		String petName = "Arnold Jr.";
+		String petBirthDate = "2019-11-30";
 
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
-		OwnerPO ownerPO = addEditPetPO.fillFieldsAndSubmit(name, birthDate);
+		OwnerPO ownerPO = addEditPetPO.fillFieldsAndSubmit(petName, petBirthDate);
 
 		List<Pet> pets = ownerPO.getPets();
 
-		assertTrue(pets.stream().anyMatch(p -> p.name.equals(name) && p.birthDate.equals(birthDate)));
+		assertTrue(pets.stream().anyMatch(p -> p.name.equals(petName) && p.birthDate.equals(petBirthDate)));
 	}
 
 	@Test
-	void testEditPetWithEmptyFields() {
+	void testEditPetToOwnerWithEmptyName() {
 		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
 
-		addEditPetPO.clearFields();
+		addEditPetPO.setName("");
 		addEditPetPO.submit();
 
 		assertEquals("is required", addEditPetPO.getNameError());
+	}
+
+	@Test
+	void testEditPetToOwnerWithEmptyBirthDate() {
+		AddEditPetPO addEditPetPO = homePO.goToFindOwner().searchFor(lastName).editFirstPet();
+
+		addEditPetPO.setBirthDate("");
+		addEditPetPO.submit();
+
 		assertEquals("is required", addEditPetPO.getBirthDateError());
 	}
 
