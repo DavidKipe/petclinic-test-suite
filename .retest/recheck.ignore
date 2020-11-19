@@ -40,8 +40,14 @@ attribute-regex=.*outline.*
 #attribute-regex=.*color.*
 #attribute-regex=.*shadow.*
 
-# more pixel difference allowed
-#pixel-diff=50px
+# minor pixel difference allowed
+pixel-diff=2px
+
+# minor color difference allowed
+color-diff=5%
+
+# ignore box-shadow on input because implicit checks reveal diffs
+matcher: type=input, attribute=box-shadow
 
 # ignore the navbar
 #matcher: xpath=/html[1]/body[1]/nav[1]

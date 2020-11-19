@@ -20,29 +20,14 @@ class BaseTests {
 		return driver;
 	}
 
-//	public void callGarbageCollectorForChrome() {
-//		Double usedJSHeapSize = (Double) ((JavascriptExecutor) webDriver).executeScript("return window.performance.memory.usedJSHeapSize/1024/1024");
-//		System.out.println("Calling gc. Memory Usage: " + usedJSHeapSize + " MiB");
-//		((JavascriptExecutor) webDriver).executeScript("window.gc()");
-////		try {
-////			TimeUnit.SECONDS.sleep(2);
-////		} catch (InterruptedException e) {
-////			e.printStackTrace();
-////		}
-//		usedJSHeapSize = (Double) ((JavascriptExecutor) webDriver).executeScript("return window.performance.memory.usedJSHeapSize/1024/1024");
-//		System.out.println("Memory Usage after gc: " + usedJSHeapSize + " MiB");
-//	}
-
 	@BeforeEach
 	void createAndStartService() {
-		WebDriver webDriver = getDriverInitialized();
-        homePO = new HomePO(webDriver);
+        homePO = new HomePO(getDriverInitialized());
 	}
 
 	@AfterEach
 	void closeDriver() {
-		//callGarbageCollectorForChrome();
-		homePO.closeDriver();
+		homePO.quitDriver();
 	}
 
 

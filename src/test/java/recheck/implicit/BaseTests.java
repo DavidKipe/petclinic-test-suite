@@ -1,12 +1,14 @@
-package recheck.explicit;
+package recheck.implicit;
 
 import de.retest.recheck.Recheck;
 import de.retest.recheck.RecheckImpl;
 import de.retest.recheck.RecheckOptions;
+import de.retest.web.selenium.RecheckDriver;
 import driver.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import pageobject.HomePO;
 
 public class BaseTests {
@@ -15,8 +17,7 @@ public class BaseTests {
 
 	public static final String APP_HOME_URL = "http://localhost:8080";
 
-	private Recheck re;
-	private WebDriver driver;
+	protected RecheckDriver recheckDriver;
 
 	protected HomePO homePO;
 
@@ -26,18 +27,9 @@ public class BaseTests {
 		return driver;
 	}
 
-	protected void startTest(String testName) {
-		re.startTest(testName);
-	}
-
-	protected void endTest(String testName) {
-		re.check(driver, testName);
-		re.capTest();
-	}
-
 	@BeforeEach
 	void createAndStartService() {
-		driver = getDriverInitialized();
+		WebDriver driver = getDriverInitialized();
 
 		RecheckOptions recheckOptions = RecheckOptions.builder()
 				//.enableReportUpload()
@@ -45,15 +37,14 @@ public class BaseTests {
 				//.addIgnore("addowner.filter")
 				.build();
 
-		re = new RecheckImpl(recheckOptions);
+		recheckDriver = new RecheckDriver((RemoteWebDriver) driver, recheckOptions);
 
-		homePO = new HomePO(driver);
+		homePO = new HomePO(recheckDriver);
 	}
 
 	@AfterEach
 	void closeDriver() {
 		homePO.quitDriver();
-		re.cap();
 	}
 
 }

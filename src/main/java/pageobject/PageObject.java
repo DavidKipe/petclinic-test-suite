@@ -16,4 +16,8 @@ class PageObject {
 		driver.close();
 	}
 
+	public void quitDriver() {
+		driver.quit();
+	}
+
 }
