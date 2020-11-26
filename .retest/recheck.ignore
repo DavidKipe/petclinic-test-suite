@@ -37,14 +37,11 @@
 attribute-regex=.*outline.*
 #attribute-regex=.*border.*
 #attribute-regex=.*margin.*
-#attribute-regex=.*color.*
+attribute-regex=.*color.*
 #attribute-regex=.*shadow.*
 
 # minor pixel difference allowed
 pixel-diff=2px
-
-# minor color difference allowed
-color-diff=5%
 
 # ignore box-shadow on input because implicit checks reveal diffs
 matcher: type=input, attribute=box-shadow
